@@ -32,11 +32,54 @@ ApplicationController.prototype.initializeData = function() {
 ApplicationController.prototype.initializeAnimations = function() {
 	var self = this;
 
+	var openMenuAnimation = Titanium.UI.createAnimation({
+		left: 0,
+		right: 0,
+		top: 0,
+		duration: 300
+	});
+	self.openMenuAnimation = openMenuAnimation;
+
+	var closeMenuAnimation = Titanium.UI.createAnimation({
+		left: (-1) * settings.leftMenuWidth,
+		right: 0,
+		top: 0,
+		duration: 300
+	});
+	self.closeMenuAnimation = closeMenuAnimation;
+
+	var openViewAnimation = Titanium.UI.createAnimation({
+		top: 0,
+		left: 0,		
+		duration: 600
+	});
+	self.openViewAnimation = openViewAnimation;
+
+	var platformWidth = settings.platformWidth;
+	var closeViewAnimation = Titanium.UI.createAnimation({
+		top: 0,
+		left: 10 + platformWidth,		
+		duration: 600
+	});
+	self.closeViewAnimation = closeViewAnimation;
+
 };
 
 
 ApplicationController.prototype.addEventListeners = function() {
 	var self = this;
+};
+
+ApplicationController.prototype.switchView = function(nextView) {
+	var self = this;	
+	var currentView = self.applicationWindow.currentView;
+
+	if ( currentView.id != nextView.id ) {
+		nextView.view.animate(self.openViewAnimation);	
+		currentView.view.animate(self.closeViewAnimation);
+	}
+	
+	self.applicationWindow.currentView = nextView;
 };
 
 

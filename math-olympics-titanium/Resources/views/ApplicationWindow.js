@@ -5,6 +5,7 @@
 
 var styles = require("/styles/ApplicationWindowStyles").applicationWindowStyles;
 var HeaderView = require('/views/HeaderView').HeaderView;
+var LevelSelectionView = require('/views/LevelSelectionView').LevelSelectionView;
 
 
 ApplicationWindow = function() {
@@ -26,6 +27,8 @@ ApplicationWindow.prototype.initialize = function() {
 	
 	self.initializeApplicationView();  
 	self.initializeHeaderView();
+	self.initializeMainView();
+	self.initializeLevelSelectionView();	
 
 	self.window.open();
 };
@@ -48,6 +51,25 @@ ApplicationWindow.prototype.initializeHeaderView = function() {
 			
 	self.headerView = headerView;	
 	self.view.add(headerView.view);
+};
+
+ApplicationWindow.prototype.initializeMainView = function() {
+	var self = this;
+	
+	var mainView = Titanium.UI.createView(styles.mainView);
+	mainView.id = "MAIN_VIEW";
+	self.mainView = mainView;
+	self.view.add(mainView);
+};
+
+ApplicationWindow.prototype.initializeLevelSelectionView = function() {
+	var self = this;
+
+	var levelSelectionView = new LevelSelectionView();
+	levelSelectionView.initialize();
+
+	self.levelSelectionView = levelSelectionView;
+	self.mainView.add(levelSelectionView.view);
 };
 
 
