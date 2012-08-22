@@ -63,6 +63,12 @@ ApplicationController.prototype.initializeAnimations = function() {
 	});
 	self.closeViewAnimation = closeViewAnimation;
 
+	var levelViewAnimation = Titanium.UI.createAnimation({	duration : 400 });
+	self.levelViewAnimation = levelViewAnimation;
+
+    var bottomViewAnimation = Titanium.UI.createAnimation({	duration : 400 });
+    self.bottomViewAnimation = bottomViewAnimation;
+
 };
 
 

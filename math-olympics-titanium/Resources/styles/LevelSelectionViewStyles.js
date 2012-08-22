@@ -15,7 +15,19 @@ exports.levelSelectionViewStyles = {
 		backgroundColor: "red"
 	},
 
+	levelSelectionHeaderView : {
+		//image : '/images/category_header_label.png',
+		top : 20,
+		left : 16,
+		backgroundColor: "blue"
+	},
 
-
+	flashcardSelectionCategoriesView : {
+		contentWidth : 'auto',
+		contentHeight : 'auto',
+		top : 56,
+		width : "100%",
+		height : "100%"
+	},
 	
 }; 

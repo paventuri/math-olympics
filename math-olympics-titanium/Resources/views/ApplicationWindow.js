@@ -6,6 +6,7 @@
 var styles = require("/styles/ApplicationWindowStyles").applicationWindowStyles;
 var HeaderView = require('/views/HeaderView').HeaderView;
 var LevelSelectionView = require('/views/LevelSelectionView').LevelSelectionView;
+var LevelSelectionBottomView = require('/views/LevelSelectionBottomView').LevelSelectionBottomView;
 
 
 ApplicationWindow = function() {
@@ -72,6 +73,12 @@ ApplicationWindow.prototype.initializeLevelSelectionView = function() {
 	self.mainView.add(levelSelectionView.view);
 };
 
+ApplicationWindow.prototype.updateContent = function(content) {
+	var self = this;
+	var levels = content.levels;
+	
+	//self.levelSelectionView.updateLevelsView(levels);
+};
 
 
 exports.ApplicationWindow = ApplicationWindow;
