@@ -6,9 +6,9 @@
 var settings = require('/common/commons').settings;
 var ApplicationWindow = require("/views/ApplicationWindow").ApplicationWindow;
 
+
 ApplicationController = function() {
 	var self = this;	  
-	
 	return self;
 };
 
@@ -37,7 +37,6 @@ ApplicationController.prototype.initializeAnimations = function() {
 
 ApplicationController.prototype.addEventListeners = function() {
 	var self = this;
-	
 };
 
 
