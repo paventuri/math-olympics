@@ -5,6 +5,7 @@
 
 var settings = require('/common/commons').settings;
 var ApplicationWindow = require("/views/ApplicationWindow").ApplicationWindow;
+var Level = require("/models/Level").Level;
 
 
 ApplicationController = function() {
@@ -32,14 +33,12 @@ ApplicationController.prototype.initialize = function() {
 
 ApplicationController.prototype.initializeData = function() {
   var self = this;
-
-  self.levels = [
-    // { id: 1, title: 'Pythagoras of Samos', points: 200 },
-    // { id: 2, title: 'Leonhard Euler', points: 300 },
-    // { id: 3, title: 'Carl Friedrich Gauss', points: 500 },
-    // { id: 4, title: 'Bernhard Riemann', points: 800 },
-    // { id: 5, title: 'Andrew Wiles', points: 1300 }
-    
+  
+  var levels = Level.findAll();
+  self.levels = levels;
+  
+  /**
+  self.levels = [   
     { id: 1, title: '1st Pythagoras', points: 200, isLocked: false, medal: "gold" },
     { id: 2, title: '2nd Euler', points: 300, isLocked: false, medal: "silver" },
     { id: 3, title: '3rd Gauss', points: 500, isLocked: false, medal: undefined },
@@ -48,6 +47,7 @@ ApplicationController.prototype.initializeData = function() {
     { id: 6, title: '6rd Archimedes', points: 2100, isLocked: true, medal: undefined },
     { id: 7, title: '7rd Newton', points: 3400, isLocked: true, medal: undefined },
   ];
+  **/
 
 
 };

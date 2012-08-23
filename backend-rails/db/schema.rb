@@ -14,18 +14,28 @@
 ActiveRecord::Schema.define(:version => 20120822025432) do
 
   create_table "answers", :force => true do |t|
-    t.integer  "interaction_id"
-    t.text     "content"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.integer  "interaction_id",                    :null => false
+    t.boolean  "is_correct",     :default => false
+    t.text     "content",        :default => ""
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   create_table "interactions", :force => true do |t|
-    t.text     "stem",                 :default => ""
-    t.text     "stimulus",             :default => ""
-    t.integer  "correct_answer_id_id"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.integer  "level_id"
+    t.string   "topic"
+    t.text     "stem",       :default => ""
+    t.text     "stimulus",   :default => ""
+    t.integer  "points",     :default => 1
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  create_table "levels", :force => true do |t|
+    t.integer  "required_points", :default => 0
+    t.string   "title"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "profiles", :force => true do |t|
@@ -33,6 +43,8 @@ ActiveRecord::Schema.define(:version => 20120822025432) do
     t.string   "name",                :default => ""
     t.string   "location",            :default => "NY"
     t.text     "biography"
+    t.integer  "total_points",        :default => 0
+    t.integer  "level",               :default => 1
     t.boolean  "welcome",             :default => true
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false

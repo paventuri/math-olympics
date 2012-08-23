@@ -1,3 +1,5 @@
 class Answer < ActiveRecord::Base
-  # attr_accessible :title, :body
+	belongs_to :interaction
+
+  attr_accessible :interaction, :content, :is_correct
 end

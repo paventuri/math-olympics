@@ -16,7 +16,7 @@ exports.settings = {
 	leftMenuWidth: 148, 
 	dinSchriftFont : (Ti.Android ? 'DINEngschrift-Alternate' : 'DIN Schrift' ),
 	metaOTFont : (Ti.Android ? 'MetaOT-Bold' : 'Meta OT' ),
-	DATABASE_NAME : 'flashcards.sql',
+	DATABASE_NAME : 'math-olympics.sql',
 };
 
 exports.isArray = function(o) {
@@ -36,8 +36,33 @@ exports.guidGenerator = function() {
 };
 
 exports.getDatabase = function() {
-	var database = Ti.Database.install('/flashcards.sqlite', this.DATABASE_NAME);
+  var databaseName = exports.settings.DATABASE_NAME;
+	var database = Ti.Database.install('/math-olympics.sqlite', databaseName);
 	return database;
+};
+
+exports.convertResultSet = function(result) {
+  var list = [];
+  
+  while(result.isValidRow()) {
+    var item = {};
+    var fieldCount = 0;
+    
+    if (Ti.Platform.name === 'android') {
+        fieldCount = result.fieldCount;
+    } else {
+        fieldCount = result.fieldCount();
+    }    
+    
+    for (var i = 0; i < fieldCount; i++ ) {
+      item[result.fieldName(i)] = result.field(i);      
+    }
+
+    list.push(item);    
+    result.next();
+  }
+
+  return list;  
 };
 
 exports.getWebViewCSS = function() {
