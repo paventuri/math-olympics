@@ -13,6 +13,21 @@
 
 ActiveRecord::Schema.define(:version => 20120822025432) do
 
+  create_table "answers", :force => true do |t|
+    t.integer  "interaction_id"
+    t.text     "content"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "interactions", :force => true do |t|
+    t.text     "stem",                 :default => ""
+    t.text     "stimulus",             :default => ""
+    t.integer  "correct_answer_id_id"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
+
   create_table "profiles", :force => true do |t|
     t.integer  "user_id",                               :null => false
     t.string   "name",                :default => ""
