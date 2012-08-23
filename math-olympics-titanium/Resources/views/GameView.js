@@ -6,11 +6,15 @@
 var styles = require("/styles/GameViewStyles").gameViewStyles;
 var settings = require('/common/commons').settings;
 var commons = require('/common/commons');
+var Answer = require("/models/Answer").Answer;
+var AnswersRadioGroup = require("/views/components/AnswersRadioGroup").AnswersRadioGroup;
+
 
 GameView = function() {
   var self = this;
   self.id = "GAME_VIEW";
   self.interactions = [];
+  self.answers = [];
   self.currentInteraction = undefined;
   self.nextInteraction = undefined;
   self.interactionViews = [];
@@ -27,8 +31,6 @@ GameView.prototype.initialize = function() {
 
   self.initializeAnimations();
   self.initializeScrollableView();
-  self.initializeInteractionAreaView();
-  // self.addEventListeners();
   self.view.show();
 };
 
@@ -57,29 +59,6 @@ GameView.prototype.initializeScrollableView = function() {
   self.view.add(scrollView);
 };
 
-GameView.prototype.initializeInteractionAreaView = function() {
-  var self = this;
-
-  // Scrollable Views
-  var interactionAreaView = Titanium.UI.createView(styles.interactionAreaView);
-  self.interactionAreaView = interactionAreaView;
-  self.scrollView.addView(interactionAreaView);
-  /*Removed so that the views will be created as part of the update content function
-   var fakeInteractionView = Titanium.UI.createView(styles.fakeInteractionView);
-   self.fakeInteractionView = fakeInteractionView;
-   self.scrollView.addView(fakeInteractionView);
-
-   // Front
-   var frontInteractionView = Titanium.UI.createView(styles.frontInteractionView);
-   self.frontInteractionView = frontInteractionView;
-   self.interactionAreaView.add(frontInteractionView);
-
-   var frontInteractionTitleLabel = Titanium.UI.createLabel(styles.titleLabel);
-   self.frontInteractionTitleLabel = frontInteractionTitleLabel;
-   self.frontInteractionView.add(frontInteractionTitleLabel);
-   */
-};
-
 GameView.prototype.addEventListeners = function() {
   var self = this;
 
@@ -105,18 +84,47 @@ GameView.prototype.addEventListeners = function() {
 GameView.prototype.updateInterationsView = function(interactions) {
   var self = this;
   
-  var backgrounds = ["navy", "red", "orange"];
+  var backgrounds = ["#CCC", "navy", "red", "orange", "#CCC", "navy", "red", "orange"];
 
   for (var i = 0, length = interactions.length; i < length; i++) {
     var interaction = interactions[i];
     var interactionViews = Titanium.UI.createView(styles.interactionView);
     interactionViews.backgroundColor = backgrounds[i];
+    var interactionWebView = Titanium.UI.createWebView(styles.webView); 
     
+    var answerView = Titanium.UI.createWebView(styles.answerView);
+    interactionViews.add(interactionWebView);
+    
+    self.updateInteractionContent(interactionWebView, interaction);
+    
+    var answers = Answer.findBy(interaction.id);
+    // self.updateInteractionContentWithAnswers(answerView, answers);
+    
+    //create radio buttons
+    var answersRadioGroup = new AnswersRadioGroup();
+    answersRadioGroup.initialize(answers);
+    
+    interactionViews.add(answersRadioGroup.view);
     self.interactionViews[interaction.id]= interactionViews;
     self.scrollView.addView(interactionViews);
-
+    
+    
   }
+};
 
-}
+GameView.prototype.updateInteractionContent = function(interactionWebView, interaction) {
+  var self = this;
+  
+  var cssFromFile = commons.getWebViewCSS();
+  
+  var cardHtmlShell = "<!DOCTYPE html><html class='container'><head><meta name='HandheldFriendly' content='True'><meta name='MobileOptimized' content='320'/><meta name='viewport' content='width=device-width, initial-scale=1'><style>" + cssFromFile + "</style></head><body class='container'><div class='container card-container'>";
+  
+  // Front
+  var frontHtml = cardHtmlShell + "<div class='card-front'>" + interaction.stem + "</div></div></body></html>";
+  interactionWebView.html = frontHtml;
+  interactionWebView.repaint();
+  // self.frontCardTitleLabel.text = self.currentFlashcard.category_title;
+  // self.frontCardView.backgroundImage = self.getBackgroundPath(self.currentFlashcard.category_uid);
+};
 
 exports.GameView = GameView;

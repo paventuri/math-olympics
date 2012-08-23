@@ -14,7 +14,7 @@ Interaction = function() {
 
 Interaction.findBy = function (level_id) {
    var database = commons.getDatabase();
-   var sql = "SELECT id, level_id, topic, stem, stimulus, points FROM interactions ORDER by id ASC";
+   var sql = "SELECT id, level_id, topic, stem, stimulus, points FROM interactions where level_id= "+level_id +" ORDER by id ASC";
    var result = database.execute(sql);
    
    var list = commons.convertResultSet(result);

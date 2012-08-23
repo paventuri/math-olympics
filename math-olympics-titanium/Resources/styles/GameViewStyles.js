@@ -11,7 +11,6 @@ exports.gameViewStyles = {
     left : 10 + settings.platformWidth,
     height : "100%",
     width : 320,
-    backgroundColor : 'red'
   },
   
   gameScrollableView : {
@@ -32,6 +31,8 @@ exports.gameViewStyles = {
     width : "100%",
     height : "100%",
   },
+  
+  
   
   interactionView : {
     top : 0,
@@ -67,5 +68,23 @@ exports.gameViewStyles = {
       fontFamily : settings.metaOTFont
     },
   },
+  
+  webView : {
+    top: 55,
+    left: 1,
+    width: settings.platformWidth - 2,  
+    height: 170,
+    enableZoomControls: false,
+    touchEnabled: false,
+  },
+  
+   answerView : {
+    top: 260,
+    left: 1,
+    width: settings.platformWidth - 2,  
+    height: 160,
+    enableZoomControls: false,
+    touchEnabled: false
+  }
   
 };
