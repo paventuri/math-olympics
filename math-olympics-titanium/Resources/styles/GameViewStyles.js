@@ -33,7 +33,7 @@ exports.gameViewStyles = {
     height : "100%",
   },
   
-  frontInteractionView : {
+  interactionView : {
     top : 0,
     left : 0,
     width : "100%",

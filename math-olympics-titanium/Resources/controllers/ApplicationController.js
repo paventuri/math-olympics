@@ -6,11 +6,13 @@
 var settings = require('/common/commons').settings;
 var ApplicationWindow = require("/views/ApplicationWindow").ApplicationWindow;
 var Level = require("/models/Level").Level;
-
+var Interaction = require("/models/Interaction").Interaction;
 
 ApplicationController = function() {
   var self = this;    
+  self.applicationWindow = undefined;
   self.levels = [];
+  self.interactions = [];
   self.currentLevel = undefined;
   return self;
 };
@@ -172,9 +174,12 @@ ApplicationController.prototype.handleLeftMenuButtom = function(e) {
 ApplicationController.prototype.handleLevelSelection = function(e) {
   var self = this;
   var level = self.levels[e.source.id];
+  
+  self.interactions = Interaction.findBy(e.source.id);
   self.currentLevel = level;
+  
   Titanium.API.info("Level selected: " + JSON.stringify(level));
-    
+  self.applicationWindow.gameView.updateInterationsView(self.interactions);
   self.openGameView();  
 }  
 
