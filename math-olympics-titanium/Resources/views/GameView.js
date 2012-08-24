@@ -9,7 +9,6 @@ var commons = require('/common/commons');
 var Answer = require("/models/Answer").Answer;
 var AnswersRadioGroup = require("/views/components/AnswersRadioGroup").AnswersRadioGroup;
 
-
 GameView = function() {
   var self = this;
   self.id = "GAME_VIEW";
@@ -81,53 +80,71 @@ GameView.prototype.addEventListeners = function() {
   });
 };
 
-GameView.prototype.updateInterationsView = function(interactions) {
+GameView.prototype.updateInterationsView = function(level, interactions) {
   var self = this;
-  
+
   for (var i = 0, length = interactions.length; i < length; i++) {
-    var interaction = interactions[i];   
-    var answers = Answer.findBy(interaction.id);    
-    
-    var interactionView = Titanium.UI.createView(styles.interactionView);   
+    var interaction = interactions[i];
+    var answers = Answer.findBy(interaction.id);
+
+    var interactionView = Titanium.UI.createView(styles.interactionView);
     self.scrollView.addView(interactionView);
-    
+
     // Header
     var headerView = Titanium.UI.createView(styles.interactionHeaderView);
     interactionView.add(headerView);
-    
+
     var questionLabel = Titanium.UI.createLabel(styles.questionLabel);
-    questionLabel.text = "QUESTION " + (i+1) + " of " + length;
+    questionLabel.text = "QUESTION " + (i + 1) + " of " + length;
     headerView.add(questionLabel);
-    
+
     var levelLabel = Titanium.UI.createLabel(styles.levelLabel);
     levelLabel.text = "LEVEL " + interaction.level_id;
     headerView.add(levelLabel);
-    
-    // Question and Answer 
+
+    // Question and Answer
     var stemView = Titanium.UI.createView(styles.stemView);
     interactionView.add(stemView);
-    
+
     var webView = Titanium.UI.createWebView(styles.webView);
     stemView.add(webView);
-    self.updateWebContent(webView, interaction);    
+    self.updateWebContent(webView, interaction);
 
     var answerView = Titanium.UI.createView(styles.answerView);
     interactionView.add(answerView);
-    
-    //create radio buttons
+
     var answersRadioGroup = new AnswersRadioGroup();
     answersRadioGroup.initialize(answers);
-    answerView.add(answersRadioGroup.view);   
+    answerView.add(answersRadioGroup.view);
   }
+
+  // Medal View
+  var medalView = Titanium.UI.createView(styles.interactionView);
+  self.scrollView.addView(medalView);
+
+  // Header
+  var medalHeaderView = Titanium.UI.createView(styles.interactionHeaderView);
+  medalView.add(medalHeaderView);
+
+  var medalTitleLabel = Titanium.UI.createLabel(styles.questionLabel);
+  medalTitleLabel.text = "LEVEL SCORE";
+  medalHeaderView.add(medalTitleLabel);
+
+  var medalStemView = Titanium.UI.createView(styles.stemView);
+  medalView.add(medalStemView);
+  
+  var medalImage = Titanium.UI.createImageView(styles.medalImage);
+  medalStemView.add(medalImage);  
+
 };
 
 GameView.prototype.updateWebContent = function(webView, interaction) {
   var self = this;
-  
+
   var cssFromFile = commons.getWebViewCSS();
-  
+
   var htmlShell = "<!DOCTYPE html><html class='container'><head><meta name='HandheldFriendly' content='True'><meta name='MobileOptimized' content='300'/><meta name='viewport' content='width=device-width, initial-scale=1'><style>" + cssFromFile + "</style></head><body class='container'><div class='container card-container'>";
-  
+
   // Front
   var html = htmlShell + "<div class='card-front'>" + interaction.stem + "</div></div></body></html>";
   webView.html = html;

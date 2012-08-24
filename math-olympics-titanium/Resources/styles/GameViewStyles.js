@@ -84,6 +84,13 @@ exports.gameViewStyles = {
     left: 0,
     width: "100%",
     heigth : "100%",
+  },
+  
+  medalImage : {
+    top: 0,
+    left: 24,
+    image: "/images/medal.png",
+    heigth: 200
   }
   
 };

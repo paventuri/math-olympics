@@ -188,8 +188,8 @@ ApplicationController.prototype.handleLevelSelection = function(e) {
   self.currentLevel = level;
   
   Titanium.API.info("Level selected: " + JSON.stringify(level));
-  self.applicationWindow.gameView.updateInterationsView(self.interactions);
   self.openGameView();  
+  self.applicationWindow.gameView.updateInterationsView(level, self.interactions);
 }  
 
 ApplicationController.prototype.openLevelSelectionView = function() {

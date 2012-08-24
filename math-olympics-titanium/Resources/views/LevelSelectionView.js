@@ -51,7 +51,6 @@ LevelSelectionView.prototype.updateLevelsView = function(levels) {
     levelItemView.id = level.id;
     levelItemView.top = styles.levelItemView.height * i;
     var backgroundImage = ( level.isLocked == true ? self.disabledBackgrounds[i] : self.enabledBackgrounds[i] );
-    Titanium.API.info(backgroundImage);
     levelItemView.backgroundImage = backgroundImage;
 
     var levelLabel = Titanium.UI.createLabel(styles.levelLabel);

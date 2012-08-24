@@ -18,7 +18,7 @@ AnswersRadioGroup.prototype.initialize = function(answers) {
 	
 	var view = Titanium.UI.createView({			
 		layout: "vertical",
-		top: 230,
+		top: 0,
 		left: 0,		
 	});
 	self.view = view;
@@ -51,14 +51,14 @@ AnswersRadioGroup.prototype.createRadioItem = function(answer, cardSequence) {
 	var radioView = Titanium.UI.createView({				
 		top: 0,
     left: 0,
-		height: 25,
+		height: 28,
 		layout: "horizontal"
 	});
 	radioItem.view = radioView;
 
 	var image = Titanium.UI.createImageView({
 		image: self.getRadioImagePath(false),
-		left: 64,
+		left: 24,
 		touchEnabled: true
  	});
  	radioItem.image = image;
@@ -67,8 +67,8 @@ AnswersRadioGroup.prototype.createRadioItem = function(answer, cardSequence) {
 	var label = Titanium.UI.createLabel({
 		left: 8,
 		font : {
-			fontSize : 18,
-			fontFamily : settings.metaOTFont
+			fontSize : 21,
+			// fontFamily : settings.metaOTFont
 		},
 		text: answer.content,
 		color: self.getRadioColor(false)
@@ -103,18 +103,15 @@ AnswersRadioGroup.prototype.handleRadioClick = function(radioItem, cardSequence)
 
     var imageView = item.image;
     imageView.image = self.getRadioImagePath(cardSequenceItem.selected);
-    imageView.show();
+    // imageView.show();
 
     var label = item.label;
 
-    if (cardSequenceItem.selected) {
-      if (radioItem.is_correct == "t") {
-        label.text = label.text + "    CORRECT";
-      } else {
-        label.text = label.text + "    INCORRECT";
-      }
+    if ( radioItem.is_correct == "t" && cardSequenceItem.selected ) {
+      var text = radioItem.content + " (CORRECT)";
+      label.text = text;      
     }
-
+    
     label.color = self.getRadioColor(cardSequenceItem.selected);
   }
 

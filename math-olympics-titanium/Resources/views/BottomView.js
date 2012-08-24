@@ -17,6 +17,7 @@ BottomView.prototype.initialize = function() {
 
     self.view = Titanium.UI.createView(styles.bottomView);
     self.initializeLogo();
+    self.initializeProgressBar();
     self.view.show();
 };
 
@@ -25,6 +26,20 @@ BottomView.prototype.initializeLogo = function() {
   
   self.logoImage = Titanium.UI.createImageView(styles.olympicsLogo);
   self.view.add(self.logoImage);  
+};
+
+
+BottomView.prototype.initializeProgressBar = function() {
+  var self = this;
+  
+  self.baseLevelBar = Titanium.UI.createView(styles.baseLevelBar);
+  self.view.add(self.baseLevelBar);  
+  
+  self.currentLevelBar = Titanium.UI.createView(styles.currentLevelBar);
+  self.view.add(self.currentLevelBar);  
+  
+  self.milestoneLevelBar = Titanium.UI.createView(styles.milestoneLevelBar);
+  self.view.add(self.milestoneLevelBar);  
 };
 
 
