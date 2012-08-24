@@ -54,7 +54,7 @@ AnswersRadioGroup.prototype.createRadioItem = function(answer, cardSequence) {
 	var radioView = Titanium.UI.createView({				
 		top: 0,
     left: 0,
-		height: 30,
+		height: 25,
 		layout: "horizontal"
 	});
 	radioItem.view = radioView;

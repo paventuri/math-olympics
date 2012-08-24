@@ -32,15 +32,24 @@ exports.gameViewStyles = {
     height : "100%",
   },
   
-  
+  headerLabel : {
+    top : 20,
+    left : 16,
+    // color : '#333',
+    font : {
+      fontSize : 23,
+      fontFamily : settings.metaOTFont
+    },
+  },
+
   
   interactionView : {
     top : 0,
     left : 0,
     width : "100%",
     height : "100%",
-    backgroundColor : 'yellow'
-    // backgroundImage : "/images/card_background_general.png"
+    // backgroundColor : 'yellow'
+    // backgroundImage : "/images/KO_background.jpg"
     
   },
   
@@ -56,7 +65,7 @@ exports.gameViewStyles = {
     left : 0,
     width : "100%",
     height : "100%",
-    backgroundColor : 'navy'
+    // backgroundColor : 'navy'
     // backgroundImage : "/images/card_background_general.png"
   },
   
@@ -76,6 +85,9 @@ exports.gameViewStyles = {
     height: 170,
     enableZoomControls: false,
     touchEnabled: false,
+     // opacity: 0.0,
+    // backgroundColor : 'navy'
+      backgroundImage : "/images/KO_background.jpg"
   },
   
    answerView : {

@@ -8,6 +8,8 @@ var settings = require('/common/commons').settings;
 var commons = require('/common/commons');
 var Answer = require("/models/Answer").Answer;
 var AnswersRadioGroup = require("/views/components/AnswersRadioGroup").AnswersRadioGroup;
+var LevelSelectionBottomView = require("/views/LevelSelectionBottomView").LevelSelectionBottomView;
+var LevelSelectionBottomView = require("/views/LevelSelectionBottomView").LevelSelectionBottomView;
 
 
 GameView = function() {
@@ -31,6 +33,8 @@ GameView.prototype.initialize = function() {
 
   self.initializeAnimations();
   self.initializeScrollableView();
+  self.initializeHeaderView();
+  self.initializeBottomView();
   self.view.show();
 };
 
@@ -59,6 +63,22 @@ GameView.prototype.initializeScrollableView = function() {
   self.view.add(scrollView);
 };
 
+GameView.prototype.initializeBottomView = function() {
+  var self = this;
+  var bottomView = new LevelSelectionBottomView();
+  bottomView.initialize();
+  self.bottomView = bottomView;
+  self.view.add(bottomView.view);
+};
+
+GameView.prototype.initializeHeaderView = function() {
+  var self = this;
+  var headerLabel = Titanium.UI.createLabel(styles.headerLabel);
+  headerLabel.text = "Select your level".toUpperCase();
+  self.headerLabel = headerLabel;
+  self.view.add(headerLabel);
+};
+
 GameView.prototype.addEventListeners = function() {
   var self = this;
 
@@ -84,13 +104,15 @@ GameView.prototype.addEventListeners = function() {
 GameView.prototype.updateInterationsView = function(interactions) {
   var self = this;
   
-  var backgrounds = ["#CCC", "navy", "red", "orange", "#CCC", "navy", "red", "orange"];
+  var headerGameViews = ["#CCC", "navy", "red", "orange", "#CCC", "navy", "red", "orange"];
 
   for (var i = 0, length = interactions.length; i < length; i++) {
     var interaction = interactions[i];
     var interactionViews = Titanium.UI.createView(styles.interactionView);
-    interactionViews.backgroundColor = backgrounds[i];
+    // interactionViews.headerGameViewImage = "/images/KO_background.jpg"
+    // interactionViews.headerGameViewColor = headerGameViews[i];
     var interactionWebView = Titanium.UI.createWebView(styles.webView); 
+    // interactionWebView.headerGameViewImage = "/images/KO_background.jpg";
     
     var answerView = Titanium.UI.createWebView(styles.answerView);
     interactionViews.add(interactionWebView);
@@ -124,7 +146,7 @@ GameView.prototype.updateInteractionContent = function(interactionWebView, inter
   interactionWebView.html = frontHtml;
   interactionWebView.repaint();
   // self.frontCardTitleLabel.text = self.currentFlashcard.category_title;
-  // self.frontCardView.backgroundImage = self.getBackgroundPath(self.currentFlashcard.category_uid);
+  // self.frontCardView.headerGameViewImage = self.getheaderGameViewPath(self.currentFlashcard.category_uid);
 };
 
 exports.GameView = GameView;

@@ -9,9 +9,9 @@ exports.levelSelectionBottomViewStyles = {
     // Bottom View
     levelSelectionBottomView : {
       layout : 'horizontal',
-      bottom : -77,
+      bottom : 70,
       height : 77,
       width : "100%",
-      backgroundImage : '/images/start_module_bg.png'
+      backgroundImage : '/images/KO_footer_1.jpg'
     }
 };
