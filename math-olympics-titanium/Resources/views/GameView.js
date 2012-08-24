@@ -109,9 +109,10 @@ GameView.prototype.updateInterationsView = function(interactions) {
   for (var i = 0, length = interactions.length; i < length; i++) {
     var interaction = interactions[i];
     var interactionViews = Titanium.UI.createView(styles.interactionView);
-    // interactionViews.headerGameViewImage = "/images/KO_background.jpg"
+    interactionViews.headerGameViewImage = "/images/KO_background.jpg"
     // interactionViews.headerGameViewColor = headerGameViews[i];
     var interactionWebView = Titanium.UI.createWebView(styles.webView); 
+    
     // interactionWebView.headerGameViewImage = "/images/KO_background.jpg";
     
     var answerView = Titanium.UI.createWebView(styles.answerView);

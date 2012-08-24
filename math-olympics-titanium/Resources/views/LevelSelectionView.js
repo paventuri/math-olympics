@@ -14,6 +14,7 @@ LevelSelectionView.prototype.initialize = function() {
   self.view = Titanium.UI.createView(styles.levelSelectionView);
   self.initializeHeaderView();
   self.initializeLevelsView();
+  
   self.view.show();
 };
 

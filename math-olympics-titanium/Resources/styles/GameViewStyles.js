@@ -49,7 +49,7 @@ exports.gameViewStyles = {
     width : "100%",
     height : "100%",
     // backgroundColor : 'yellow'
-    // backgroundImage : "/images/KO_background.jpg"
+    backgroundImage : "/images/KO_background.jpg"
     
   },
   
@@ -87,7 +87,8 @@ exports.gameViewStyles = {
     touchEnabled: false,
      // opacity: 0.0,
     // backgroundColor : 'navy'
-      backgroundImage : "/images/KO_background.jpg"
+      // backgroundImage : "/images/KO_background.jpg",
+      backgroundColor : 'transparent'
   },
   
    answerView : {
