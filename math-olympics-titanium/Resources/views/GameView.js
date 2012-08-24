@@ -8,8 +8,6 @@ var settings = require('/common/commons').settings;
 var commons = require('/common/commons');
 var Answer = require("/models/Answer").Answer;
 var AnswersRadioGroup = require("/views/components/AnswersRadioGroup").AnswersRadioGroup;
-var LevelSelectionBottomView = require("/views/LevelSelectionBottomView").LevelSelectionBottomView;
-var LevelSelectionBottomView = require("/views/LevelSelectionBottomView").LevelSelectionBottomView;
 
 
 GameView = function() {
@@ -33,8 +31,6 @@ GameView.prototype.initialize = function() {
 
   self.initializeAnimations();
   self.initializeScrollableView();
-  self.initializeHeaderView();
-  self.initializeBottomView();
   self.view.show();
 };
 
@@ -63,22 +59,6 @@ GameView.prototype.initializeScrollableView = function() {
   self.view.add(scrollView);
 };
 
-GameView.prototype.initializeBottomView = function() {
-  var self = this;
-  var bottomView = new LevelSelectionBottomView();
-  bottomView.initialize();
-  self.bottomView = bottomView;
-  self.view.add(bottomView.view);
-};
-
-GameView.prototype.initializeHeaderView = function() {
-  var self = this;
-  var headerLabel = Titanium.UI.createLabel(styles.headerLabel);
-  headerLabel.text = "Select your level".toUpperCase();
-  self.headerLabel = headerLabel;
-  self.view.add(headerLabel);
-};
-
 GameView.prototype.addEventListeners = function() {
   var self = this;
 
@@ -104,50 +84,54 @@ GameView.prototype.addEventListeners = function() {
 GameView.prototype.updateInterationsView = function(interactions) {
   var self = this;
   
-  var headerGameViews = ["#CCC", "navy", "red", "orange", "#CCC", "navy", "red", "orange"];
-
   for (var i = 0, length = interactions.length; i < length; i++) {
-    var interaction = interactions[i];
-    var interactionViews = Titanium.UI.createView(styles.interactionView);
-    interactionViews.headerGameViewImage = "/images/KO_background.jpg"
-    // interactionViews.headerGameViewColor = headerGameViews[i];
-    var interactionWebView = Titanium.UI.createWebView(styles.webView); 
+    var interaction = interactions[i];   
+    var answers = Answer.findBy(interaction.id);    
     
-    // interactionWebView.headerGameViewImage = "/images/KO_background.jpg";
+    var interactionView = Titanium.UI.createView(styles.interactionView);   
+    self.scrollView.addView(interactionView);
     
-    var answerView = Titanium.UI.createWebView(styles.answerView);
-    interactionViews.add(interactionWebView);
+    // Header
+    var headerView = Titanium.UI.createView(styles.interactionHeaderView);
+    interactionView.add(headerView);
     
-    self.updateInteractionContent(interactionWebView, interaction);
+    var questionLabel = Titanium.UI.createLabel(styles.questionLabel);
+    questionLabel.text = "QUESTION " + (i+1) + " of " + length;
+    headerView.add(questionLabel);
     
-    var answers = Answer.findBy(interaction.id);
-    // self.updateInteractionContentWithAnswers(answerView, answers);
+    var levelLabel = Titanium.UI.createLabel(styles.levelLabel);
+    levelLabel.text = "LEVEL " + interaction.level_id;
+    headerView.add(levelLabel);
+    
+    // Question and Answer 
+    var stemView = Titanium.UI.createView(styles.stemView);
+    interactionView.add(stemView);
+    
+    var webView = Titanium.UI.createWebView(styles.webView);
+    stemView.add(webView);
+    self.updateWebContent(webView, interaction);    
+
+    var answerView = Titanium.UI.createView(styles.answerView);
+    interactionView.add(answerView);
     
     //create radio buttons
     var answersRadioGroup = new AnswersRadioGroup();
     answersRadioGroup.initialize(answers);
-    
-    interactionViews.add(answersRadioGroup.view);
-    self.interactionViews[interaction.id]= interactionViews;
-    self.scrollView.addView(interactionViews);
-    
-    
+    answerView.add(answersRadioGroup.view);   
   }
 };
 
-GameView.prototype.updateInteractionContent = function(interactionWebView, interaction) {
+GameView.prototype.updateWebContent = function(webView, interaction) {
   var self = this;
   
   var cssFromFile = commons.getWebViewCSS();
   
-  var cardHtmlShell = "<!DOCTYPE html><html class='container'><head><meta name='HandheldFriendly' content='True'><meta name='MobileOptimized' content='320'/><meta name='viewport' content='width=device-width, initial-scale=1'><style>" + cssFromFile + "</style></head><body class='container'><div class='container card-container'>";
+  var htmlShell = "<!DOCTYPE html><html class='container'><head><meta name='HandheldFriendly' content='True'><meta name='MobileOptimized' content='300'/><meta name='viewport' content='width=device-width, initial-scale=1'><style>" + cssFromFile + "</style></head><body class='container'><div class='container card-container'>";
   
   // Front
-  var frontHtml = cardHtmlShell + "<div class='card-front'>" + interaction.stem + "</div></div></body></html>";
-  interactionWebView.html = frontHtml;
-  interactionWebView.repaint();
-  // self.frontCardTitleLabel.text = self.currentFlashcard.category_title;
-  // self.frontCardView.headerGameViewImage = self.getheaderGameViewPath(self.currentFlashcard.category_uid);
+  var html = htmlShell + "<div class='card-front'>" + interaction.stem + "</div></div></body></html>";
+  webView.html = html;
+  webView.repaint();
 };
 
 exports.GameView = GameView;

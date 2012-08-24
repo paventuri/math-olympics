@@ -10,12 +10,12 @@ LeftMenuView = function() {
   self.id = "LEFT_MENU_VIEW";
 
   self.menuItems = {
-    homeItem:     "Home",
-    socialItem:   "Social",   
-    medalsItem:   "Medals",
-    storeItem:    "Store",
-    rulesItem:    "Rules",
-    gameItem:     "Back to Game"
+    homeItem :     "Home »",
+    gameItem :     "Questions »",
+    medalsItem :   "My Medals »",   
+    socialItem :   "Social »",
+    rulesItem :    "Rules »",
+    storeItem :    "Store »"    
   };
 
   return self;

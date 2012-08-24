@@ -6,8 +6,8 @@
 var styles = require("/styles/ApplicationWindowStyles").applicationWindowStyles;
 var HeaderView = require('/views/HeaderView').HeaderView;
 var LeftMenuView = require('/views/LeftMenuView').LeftMenuView;
+var BottomView = require("/views/BottomView").BottomView;
 var LevelSelectionView = require('/views/LevelSelectionView').LevelSelectionView;
-var LevelSelectionBottomView = require('/views/LevelSelectionBottomView').LevelSelectionBottomView;
 var GameView = require('/views/GameView').GameView;
 
 
@@ -19,6 +19,7 @@ ApplicationWindow = function() {
   self.view = undefined;
   self.mainView = undefined;
   self.leftMenuView = undefined;
+  self.bottomView = undefined;
   self.levelSelectionView = undefined;
   self.gameView = undefined;
 
@@ -36,6 +37,7 @@ ApplicationWindow.prototype.initialize = function() {
   self.initializeLeftMenuView();
   self.initializeGameView();
   self.initializeLevelSelectionView();  
+  self.initializeBottomView();
   self.currentView = self.levelSelectionView;
 
   self.window.open();
@@ -68,6 +70,14 @@ ApplicationWindow.prototype.initializeMainView = function() {
   mainView.id = "MAIN_VIEW";
   self.mainView = mainView;
   self.view.add(mainView);
+};
+
+ApplicationWindow.prototype.initializeBottomView = function() {
+  var self = this;
+  var bottomView = new BottomView();
+  bottomView.initialize();
+  self.bottomView = bottomView;
+  self.view.add(bottomView.view);
 };
 
 ApplicationWindow.prototype.initializeLevelSelectionView = function() {

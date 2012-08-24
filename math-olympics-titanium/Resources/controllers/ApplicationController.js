@@ -36,8 +36,17 @@ ApplicationController.prototype.initialize = function() {
 ApplicationController.prototype.initializeData = function() {
   var self = this;
   
-  var levels = Level.findAll();
+  var levels = [
+   { id: 1, title: "LEVEL 1", isLocked: true },
+   { id: 2, title: "LEVEL 2", isLocked: true },
+   { id: 3, title: "LEVEL 3", isLocked: true },
+   { id: 4, title: "LEVEL 4", isLocked: false },
+   { id: 5, title: "LEVEL 5", isLocked: true },
+   
+  ];
   self.levels = levels;
+  
+  
   
   /**
   self.levels = [   

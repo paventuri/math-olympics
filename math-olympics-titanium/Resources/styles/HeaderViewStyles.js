@@ -25,6 +25,6 @@ exports.headerViewStyles = {
   right : 9,
   width : 126,
   height : 45,
-  top : 11  
+  top : 4  
   }
 };

@@ -23,81 +23,67 @@ exports.gameViewStyles = {
     clipViews : false,
     showHorizontalScrollIndicator: true
   },
-  
-  
-  interactionAreaView : {
-    top : 0,
-    left : 0,
-    width : "100%",
-    height : "100%",
-  },
-  
-  headerLabel : {
-    top : 20,
-    left : 16,
-    // color : '#333',
-    font : {
-      fontSize : 23,
-      fontFamily : settings.metaOTFont
-    },
-  },
 
-  
   interactionView : {
     top : 0,
-    left : 0,
-    width : "100%",
-    height : "100%",
-    // backgroundColor : 'yellow'
-    backgroundImage : "/images/KO_background.jpg"
-    
-  },
-  
-  fakeInteractionView : {
-    top : 0,
-    left : 10 + settings.platformWidth,
-    width : "100%",
+    left : 5,
+    right : 5,
+    // width : "100%",
     height : "100%",
   },
-  
-  nextInteractionView : {
+
+  interactionHeaderView : {
     top : 0,
     left : 0,
-    width : "100%",
-    height : "100%",
-    // backgroundColor : 'navy'
-    // backgroundImage : "/images/card_background_general.png"
+    backgroundImage : '/images/game_header_background.png',
+    height: 32,     
+    width: "100%",
   },
   
-  titleLabel : {
-    left: 16,
-    top: 12,
+  questionLabel : {
+    top : 10,
+    left : 10,
+    color: "#FFF",
     font : {
       fontSize : 18,
-      fontFamily : settings.metaOTFont
-    },
+      fontFamily : settings.dinSchriftFont
+    }
+  },
+  
+  levelLabel : {
+    top : 10,
+    right : 10,
+    color: "#FFF",
+    font : {
+      fontSize : 18,
+      fontFamily : settings.dinSchriftFont
+    }
+  },
+  
+  stemView : {
+    top : 32,
+    left : 0,
+    height : "100%",
+    width : "100%",
+    backgroundImage : "/images/game_view_background.png",
+    layout : 'vertical'
   },
   
   webView : {
-    top: 55,
+    top: 0,
     left: 1,
-    width: settings.platformWidth - 2,  
+    width: settings.platformWidth - 16,  
     height: 170,
     enableZoomControls: false,
     touchEnabled: false,
-     // opacity: 0.0,
-    // backgroundColor : 'navy'
-      // backgroundImage : "/images/KO_background.jpg",
-      backgroundColor : 'transparent'
+    backgroundColor : 'transparent'
   },
   
-   answerView : {
-    top: 260,
-    left: 1,
-    width: settings.platformWidth - 2,  
-    height: 160,
-    enableZoomControls: false,
-    touchEnabled: false
+  answerView : {
+    top: 170,
+    left: 0,
+    width: "100%",
+    heigth : "100%",
   }
   
 };

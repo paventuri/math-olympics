@@ -7,8 +7,7 @@ var settings = require('/common/commons').settings;
 
 AnswersRadioGroup = function() {
 	var self = this;
-	self.id = "ANSWER_SELECTION_CHECKBOX_GROUP";
-//	self.cardSequence = {}
+	self.id = "ANSWER_SELECTION_RADIO_GROUP";
 	self.radioItems = [];
 
 	return self;
@@ -41,8 +40,6 @@ AnswersRadioGroup.prototype.initializeCardSequence = function(answers) {
 
 AnswersRadioGroup.prototype.createRadioItem = function(answer, cardSequence) {
 	var self = this;
-	// var params = self.cardSequence[answer];
-	
 	var radioItem = { id: answer.id,
 	                   index: answer.index,
 	                    title: answer.title,

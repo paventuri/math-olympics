@@ -26,7 +26,7 @@ exports.applicationWindowStyles = {
 
   // Main View
   mainView : {
-      top : 56,
+      top : 58,
       left : settings.leftMenuWidth,
       width : "100%",
       height : "100%",
